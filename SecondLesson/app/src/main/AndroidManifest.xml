@@ -24,6 +24,9 @@
         <activity android:name=".CalculatorActivity"/>
         <activity android:name=".OrientationActivity"
             android:configChanges="orientation|screenSize"/>
+        <activity android:name=".InflaterActivity"/>
+        <activity android:name=".SpinnerActivity"/>
+
     </application>
 
 </manifest>

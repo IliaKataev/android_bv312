@@ -13,6 +13,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonCalc;
     private Button buttonOrientation;
+
+    private Button buttonInflater;
+
+    private Button buttonSpinner;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonInflater = findViewById(R.id.button_inflater);
+        buttonInflater.setOnClickListener(v -> startActivity(new Intent(this, InflaterActivity.class)));
+
+        buttonSpinner = findViewById(R.id.button_spinner);
+        buttonSpinner.setOnClickListener(v -> startActivity(new Intent(this, SpinnerActivity.class)));
+
+
 
     }
 
