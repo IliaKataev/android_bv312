@@ -57,6 +57,16 @@
             android:layout_marginRight="52dp"
             android:layout_marginBottom="10dp"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_fragment"
+            android:text="Fragment"
+            android:textSize="16sp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginRight="52dp"
+            android:layout_marginBottom="10dp"/>
+
     </LinearLayout>
 
 </ScrollView>

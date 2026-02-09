@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonInflater;
 
     private Button buttonSpinner;
+
+    private Button buttonFragment;
 
 
     @Override
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
         buttonSpinner = findViewById(R.id.button_spinner);
         buttonSpinner.setOnClickListener(v -> startActivity(new Intent(this, SpinnerActivity.class)));
+
+        buttonFragment = findViewById(R.id.button_fragment);
+        buttonFragment.setOnClickListener(v -> startActivity(new Intent(this, FragmentsActivity.class)));
 
 
 
