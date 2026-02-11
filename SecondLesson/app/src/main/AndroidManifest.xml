@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SecondLesson">
         <activity
+            android:name=".ShortCutActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -20,13 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".CalculatorActivity"/>
-        <activity android:name=".OrientationActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".InflaterActivity"/>
-        <activity android:name=".SpinnerActivity"/>
-        <activity android:name=".FragmentsActivity"/>
+        <activity android:name=".CalculatorActivity" />
+        <activity
+            android:name=".OrientationActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".InflaterActivity" />
+        <activity android:name=".SpinnerActivity" />
+        <activity android:name=".FragmentsActivity" />
+        <activity android:name=".HistoryActivity" />
     </application>
 
 </manifest>
