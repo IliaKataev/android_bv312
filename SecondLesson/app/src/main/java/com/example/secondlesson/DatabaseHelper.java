@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.secondlesson.models.HistoryItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,19 +54,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<String> getHistory(){
-        List<String> historyList = new ArrayList<>();
+    public List<HistoryItem> getHistory(){
+        List<HistoryItem> historyList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_HISTORY, null);
         if(cursor.moveToFirst()) {
             do {
                 String expression = cursor.getString(1);
-                String result = cursor.getString(2);
-                historyList.add(expression + " = " + result);
+                int id = cursor.getInt(0);
+                historyList.add(new HistoryItem(id, expression));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return historyList;
+    }
+
+    public void deleteItem(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_HISTORY, COLUMN_EXPRESSION + " = ?", new String[]{String.valueOf(id)});
+        db.close();
     }
 }

@@ -80,7 +80,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
         display.setText(String.valueOf(result));
 
-        String expression = firstNumber + " " + operation + " " + secondNumber;
+        String expression = firstNumber + " " + operation + " " + secondNumber + " = " + String.valueOf(result);
         dbHelper.insertHistory(expression, String.valueOf(result));
 
         isNewInput = true;
