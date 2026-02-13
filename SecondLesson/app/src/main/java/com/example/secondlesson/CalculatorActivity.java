@@ -13,17 +13,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
+
+import com.example.secondlesson.room.AppDataBase;
+import com.example.secondlesson.room.CategoryEntity;
+import com.example.secondlesson.room.HistoryEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorActivity extends AppCompatActivity {
 
-    private DatabaseHelper dbHelper;
     private EditText display;
     private int firstNumber = 0;
     private String operation = "";
     private boolean isNewInput = true;
+    private AppDataBase db;
 
 
     @Override
@@ -31,7 +36,17 @@ public class CalculatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
         display = findViewById(R.id.display);
-        dbHelper = new DatabaseHelper(this);
+
+        db = Room.databaseBuilder(getApplicationContext(), AppDataBase.class, "my-database").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+
+        CategoryEntity category = db.categoryDAO().getByName("Обычные");
+
+        if(category == null){
+            category = new CategoryEntity();
+            category.name = "Обычные";
+            long newId = db.categoryDAO().insert(category);
+            category.id = (int)newId;
+        }
 
         Button buttonHistory = findViewById(R.id.button_history);
         buttonHistory.setOnClickListener(v -> startActivity(new Intent(this, HistoryActivity.class)));
@@ -80,8 +95,15 @@ public class CalculatorActivity extends AppCompatActivity {
 
         display.setText(String.valueOf(result));
 
-        String expression = firstNumber + " " + operation + " " + secondNumber + " = " + String.valueOf(result);
-        dbHelper.insertHistory(expression, String.valueOf(result));
+        CategoryEntity category = db.categoryDAO().getByName("Обычные");
+
+        HistoryEntity history = new HistoryEntity();
+        history.expression = firstNumber + " " + operation + " " + secondNumber;
+        history.result = String.valueOf(result);
+        history.category_id = category.id;
+
+        db.historyDAO().insert(history);
+
 
         isNewInput = true;
     }
